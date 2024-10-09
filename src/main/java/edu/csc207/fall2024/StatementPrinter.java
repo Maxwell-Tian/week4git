@@ -24,51 +24,57 @@ public class StatementPrinter {
     public String statement() {
         int totalAmount = 0;
         int volumeCredits = 0;
-        String result = "Statement for " + invoice.getCustomer() + "\n";
+        StringBuilder statementString = new StringBuilder("Statement for " + invoice.getCustomer() + "\n");
 
         NumberFormat frmt = NumberFormat.getCurrencyInstance(Locale.US);
 
-        for (Performance p : invoice.getPerformances()) {
-            Play play = plays.get(p.getPlayID());
-            final int thisAmount = getAmount(p, play);
-
+        for (Performance performance : invoice.getPerformances()) {
+            final int thisAmount = getAmount(performance);
             // add volume credits
-            volumeCredits += Math.max(p.getAudience() - Constants.BASE_VOLUME_CREDIT_THRESHOLD, 0);
+            volumeCredits += Math.max(performance.getAudience() - Constants.BASE_VOLUME_CREDIT_THRESHOLD, 0);
             // add extra credit for every five comedy attendees
-            if ("comedy".equals(play.getType())) volumeCredits += p.getAudience() / Constants.COMEDY_EXTRA_VOLUME_FACTOR;
+            if ("comedy".equals(getPlay(performance).getType())) volumeCredits += performance.getAudience() / Constants.COMEDY_EXTRA_VOLUME_FACTOR;
 
             // print line for this order
-            result += String.format("  %s: %s (%s seats)%n", play.getName(), frmt.format(thisAmount / 100), p.getAudience());
+            statementString.append(String.format("  %s: %s (%s seats)%n", getPlay(performance).getName(), frmt.format(thisAmount / 100), performance.getAudience()));
             totalAmount += thisAmount;
         }
-        result += String.format("Amount owed is %s%n", frmt.format(totalAmount / 100));
-        result += String.format("You earned %s credits\n", volumeCredits);
-        return result;
+        statementString.append(String.format("Amount owed is %s%n", frmt.format(totalAmount / 100)));
+        statementString.append(String.format("You earned %s credits\n", volumeCredits));
+        return statementString.toString();
     }
 
-    private static int getAmount(Performance performance, Play play) {
-        int thisAmount = 0;
+    private Play getPlay(Performance performance) {
+        return plays.get(performance.getPlayID());
+    }
 
-        switch (play.getType()) {
+    private int getAmount(Performance performance) {
+        return amountFor(performance);
+    }
+
+    private int amountFor(Performance performance) {
+        int resultAmount;
+        switch (getPlay(performance).getType()) {
             case "tragedy":
-                thisAmount = 40000;
+                resultAmount = 40000;
                 if (performance.getAudience() > Constants.TRAGEDY_AUDIENCE_THRESHOLD) {
-                    thisAmount += 1000 * (performance.getAudience() - 30);
+                    resultAmount += 1000 * (performance.getAudience() - 30);
                 }
                 break;
             case "comedy":
-                thisAmount = Constants.COMEDY_BASE_AMOUNT;
+                resultAmount = Constants.COMEDY_BASE_AMOUNT;
                 if (performance.getAudience() > Constants.COMEDY_AUDIENCE_THRESHOLD) {
-                    thisAmount += Constants.COMEDY_OVER_BASE_CAPACITY_AMOUNT
+                    resultAmount += Constants.COMEDY_OVER_BASE_CAPACITY_AMOUNT
                             + (Constants.COMEDY_OVER_BASE_CAPACITY_PER_PERSON
                             * (performance.getAudience() - Constants.COMEDY_AUDIENCE_THRESHOLD));
                 }
-                thisAmount += Constants.COMEDY_AMOUNT_PER_AUDIENCE * performance.getAudience();
+                resultAmount += Constants.COMEDY_AMOUNT_PER_AUDIENCE * performance.getAudience();
                 break;
             default:
-                throw new RuntimeException(String.format("unknown type: %s", play.getType()));
+                throw new RuntimeException(String.format("unknown type: %s", getPlay(performance).getType()));
         }
-        return thisAmount;
+        return resultAmount;
     }
+
 
 }
