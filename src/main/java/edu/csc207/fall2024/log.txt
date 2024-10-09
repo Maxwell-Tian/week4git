@@ -1,5 +1,17 @@
-Oct 9th 2024, 15:38, Robarts commons:
-    commited messages: refactoring public variables and framing Calculator classes
+Oct 9th 2024, 15:38, Robarts commons, Maxwell Tian:
+    commit message: refactoring public variables and framing Calculator classes
     log: created AbstractPerformanceCalculator class and it's subclasses, changed public arguments in
     Performance class and Play class to private. setter was also constructed and relative issue caused
     by this change was fixed.
+
+Oct 9th 2024, 18:11, Robarts commons, Maxwell Tian:
+    commit message: 2.1 finished with issue with testing - difference in line separators
+    log: task 2.1 finished, unexpected fail in test occurred. Assistance from TA or professor is needed
+
+Oct 9th 2024, 18:11, Robarts commons, Maxwell Tian:
+    commit message: removing redundant log
+    log: removing "Update by Maxwell.txt"
+
+Oct 9th 2024, 18:38, Robarts commons, Maxwell Tian:
+    commit message: task 2.2
+    log: task 2.2 finished
