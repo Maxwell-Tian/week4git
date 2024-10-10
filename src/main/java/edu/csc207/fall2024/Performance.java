@@ -1,7 +1,10 @@
 package edu.csc207.fall2024;
 
+/**
+ *  Representing a performance.
+ */
+// previous checkstyle error: missing the javadoc on the top of this line!!!
 public class Performance {
-
     private String playID;
     private int audience;
 

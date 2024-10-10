@@ -8,12 +8,24 @@ import java.util.Map;
  * This class generates a statement for a given invoice of performances.
  */
 public class StatementPrinter {
-    public Invoice invoice;
-    public Map<String, Play> plays;
+    private static final int FORTYTHOUSAND = 40000;
+    private static final int THOUSAND = 1000;
+    private static final int THIRTY = 30;
+    private Invoice invoice;
+    private Map<String, Play> plays;
+    // privious checkstyle error: attributs should be private and have accesspr method
 
     public StatementPrinter(Invoice invoice, Map<String, Play> plays) {
         this.invoice = invoice;
         this.plays = plays;
+    }
+
+    public Invoice getInvoice() {
+        return invoice;
+    }
+
+    public Map<String, Play> getPlays() {
+        return plays;
     }
 
     /**
@@ -22,17 +34,23 @@ public class StatementPrinter {
      * @throws RuntimeException if one of the play types is not known
      */
     public String statement() {
-        StringBuilder statementString = new StringBuilder("Statement for " + invoice.getCustomer() + "\n");
+        final StringBuilder statementString = new StringBuilder("Statement for " + invoice.getCustomer() + "\n");
+        // previous checkstyle error: not stating StringBuilder statementString to be final
         for (Performance performance : invoice.getPerformances()) {
             // print line for this order
-            statementString.append(String.format("  %s: %s (%s seats)%n", getPlay(performance).getName(), usd(getAmount(performance)), performance.getAudience()));
+            statementString.append(String.format(
+                    "  %s: %s (%s seats)%n",
+                    getPlay(performance).getName(),
+                    usd(getAmount(performance)),
+                    performance.getAudience())
+            );
         }
         statementString.append(String.format("Amount owed is %s%n", usd(totalAmount())));
         statementString.append(String.format("You earned %s credits\n", getVolumeCredits()));
         return statementString.toString();
     }
 
-    private int totalAmount(){
+    private int totalAmount() {
         int totalAmount = 0;
         for (Performance performance : invoice.getPerformances()) {
             final int thisAmount = getAmount(performance);
@@ -57,7 +75,9 @@ public class StatementPrinter {
     private int volumeCreditsFor(Performance performance) {
         int result = Math.max(performance.getAudience() - Constants.BASE_VOLUME_CREDIT_THRESHOLD, 0);
         // add extra credit for every five comedy attendees
-        if ("comedy".equals(getPlay(performance).getType())) result += performance.getAudience() / Constants.COMEDY_EXTRA_VOLUME_FACTOR;
+        if ("comedy".equals(getPlay(performance).getType())) {
+            result += performance.getAudience() / Constants.COMEDY_EXTRA_VOLUME_FACTOR;
+        }
         return result;
     }
 
@@ -73,9 +93,9 @@ public class StatementPrinter {
         int resultAmount;
         switch (getPlay(performance).getType()) {
             case "tragedy":
-                resultAmount = 40000;
+                resultAmount = FORTYTHOUSAND;
                 if (performance.getAudience() > Constants.TRAGEDY_AUDIENCE_THRESHOLD) {
-                    resultAmount += 1000 * (performance.getAudience() - 30);
+                    resultAmount += THOUSAND * (performance.getAudience() - THIRTY);
                 }
                 break;
             case "comedy":
@@ -92,6 +112,5 @@ public class StatementPrinter {
         }
         return resultAmount;
     }
-
 
 }
