@@ -1,4 +1,4 @@
-Oct 9th 2024, 15:38, Robarts commons, Maxwell Tian:
+Oct 9th 2024, 15:38, Robarts commons, Maxwell Tian (Zhaokai Tian):
     commit message: refactoring public variables and framing Calculator classes
     log: created AbstractPerformanceCalculator class and it's subclasses, changed public arguments in
     Performance class and Play class to private. setter was also constructed and relative issue caused
@@ -22,5 +22,5 @@ Oct 9th 2024, 18:50, Robarts commons, Maxwell Tian:
 
 Oct 9th 2024, 20:01, Robarts commons, Maxwell Tian:
     commit message: task 2.4
-    log: task 2.4 finished
+    log: task 2 finished
 
