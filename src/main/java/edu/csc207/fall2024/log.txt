@@ -20,3 +20,7 @@ Oct 9th 2024, 18:50, Robarts commons, Maxwell Tian:
     commit message: task 2.3
     log: task 2.3 finished
 
+Oct 9th 2024, 20:01, Robarts commons, Maxwell Tian:
+    commit message: task 2.4
+    log: task 2.4 finished
+
