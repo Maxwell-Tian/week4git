@@ -2,7 +2,7 @@ Oct 9th 2024, 15:38, Robarts commons, Maxwell Tian (Zhaokai Tian):
     commit message: refactoring public variables and framing Calculator classes
     log: created AbstractPerformanceCalculator class and it's subclasses, changed public arguments in
     Performance class and Play class to private. setter was also constructed and relative issue caused
-    by this change was fixed.
+    by this change was fixed. Task 4.1 completed.
 
 Oct 9th 2024, 18:11, Robarts commons, Maxwell Tian:
     commit message: 2.1 finished with issue with testing - difference in line separators
@@ -24,3 +24,10 @@ Oct 9th 2024, 20:01, Robarts commons, Maxwell Tian:
     commit message: task 2.4
     log: task 2 finished
 
+Oct 9th 2024, 20:02, Robarts commons, Maxwell Tian:
+    commit message: log update
+    log: log update
+
+Oct 9th 2024, 20:07, Robarts commons, Maxwell Tian:
+    commit message: log update
+    log: log update
