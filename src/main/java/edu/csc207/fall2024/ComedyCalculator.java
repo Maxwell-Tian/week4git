@@ -2,8 +2,8 @@ package edu.csc207.fall2024;
 
 public class ComedyCalculator extends AbstractPerformanceCalculator{
 
-    public ComedyCalculator(Performance performance, Play play) {
-        super(performance, play);
+    public ComedyCalculator(Performance performance, Play play, StatementData statementData) {
+        super(performance, play, statementData);
     }
     // TODO: finish amountFor() and volumeCredits()
 

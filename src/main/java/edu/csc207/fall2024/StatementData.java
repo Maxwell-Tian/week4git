@@ -15,17 +15,7 @@ public class StatementData {
         for (Performance performance : invoice.getPerformances()) {
             Play local_play = plays.get(performance.getPlayID());
             this.performanceData.add(new PerformanceData(performance, local_play));
-
         }
-    }
-
-    public int totalAmount() {
-        int totalAmount = 0;
-        for (PerformanceData performanceData : getPerformances()) {
-            final int thisAmount = performanceData.amountFor();
-            totalAmount += thisAmount;
-        }
-        return totalAmount;
     }
 
     public List<PerformanceData> getPerformances() {
@@ -34,6 +24,15 @@ public class StatementData {
 
     public String getCustomer() {
         return invoice.getCustomer();
+    }
+
+    public int totalAmount() {
+        int totalAmount = 0;
+        for (PerformanceData performanceData : getPerformances()) {
+            final int thisAmount = performanceData.getAmount();
+            totalAmount += thisAmount;
+        }
+        return totalAmount;
     }
 
     public int volumeCredits() {

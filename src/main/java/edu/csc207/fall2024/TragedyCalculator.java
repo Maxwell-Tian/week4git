@@ -2,8 +2,8 @@ package edu.csc207.fall2024;
 
 public class TragedyCalculator extends AbstractPerformanceCalculator{
 
-    public TragedyCalculator(Performance performance, Play play) {
-        super(performance, play);
+    public TragedyCalculator(Performance performance, Play play, StatementData statementData) {
+        super(performance, play, statementData);
     }
     // TODO: finish amountFor() and volumeCredits()
 

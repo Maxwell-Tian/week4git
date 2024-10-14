@@ -16,7 +16,8 @@ public class PerformanceData {
         return play.getType();
     }
 
-    public int amountFor() {
+
+    public int getAmount() {
         int resultAmount;
         switch (getType()) {
             case "tragedy":

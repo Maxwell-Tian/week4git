@@ -38,7 +38,7 @@ public class StatementPrinter {
             statementString.append(String.format(
                     "  %s: %s (%s seats)%n",
                     performanceData.getName(),
-                    usd(performanceData.amountFor()),
+                    usd(performanceData.getAmount()),
                     performanceData.getAudience())
             );
         }
@@ -50,8 +50,4 @@ public class StatementPrinter {
     protected String usd(int usdLocalTemp) {
         return NumberFormat.getCurrencyInstance(Locale.US).format(usdLocalTemp / Constants.PERCENT_FACTOR);
     }
-
-
-
-
 }
